@@ -13,10 +13,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 @Qualifier("bookDetails")
@@ -63,11 +66,26 @@ public class BookDetailsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         rb=resources;
         this.openedBook = StageController.getOpenedBook();
+        AnchorPane.setTopAnchor(fxGrid,0.0);
+        AnchorPane.setLeftAnchor(fxGrid,0.0);
+        fxGrid.setMaxSize(700, 700);
+        fxGrid.setMinSize(700, 700);
 
         fxName.setText(openedBook.getName());
         fxAuthorName.setText( authorService.getAuthorfromId(openedBook.getId()).getName() );
         fxPublisher.setText(publisherService.getPublisherfromId(openedBook.getId()).getName());
         fxIsbnNo.setText(openedBook.getIsnbNo());
+        fxCloseButton.setOnMouseClicked(event ->
+        {
+            try {
+                stageController.  closeScene();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
 
+        });
     }
+
 }

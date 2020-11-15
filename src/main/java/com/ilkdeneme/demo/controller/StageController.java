@@ -35,10 +35,11 @@ public static Book openedBook=new Book();
     public HashMap<String, Book> bookList = new HashMap<>();
     @Autowired
     private ApplicationContext appContext;
-
+ResourceBundle rb;
 
     public void loadNewScene(String sceneName, ResourceBundle rb, AppData data) throws IOException, URISyntaxException {
         try {
+rb=rb;
             FXMLLoader loader = new FXMLLoader();
             loader.setControllerFactory(appContext::getBean);
 
@@ -48,7 +49,8 @@ public static Book openedBook=new Book();
           setOpenedBook(data.getBook());
 //            if (loader.getController().getClass().equals(BookDetailsController.class))
 //    setDataToControllerReflection(loader,data);
-            root.setPrefSize(500, 500);
+            root.setMaxSize(700, 700);
+           root.setMinSize(700,700);
             getMainStage().setScene(new Scene(root));
 
         } catch (Exception e) {
@@ -56,14 +58,16 @@ public static Book openedBook=new Book();
         }
 
     }
-
+     void closeScene() throws IOException, URISyntaxException {
+  loadNewScene("Menu",this.rb,new AppData());
+    }
     private void setDataToControllerReflection(FXMLLoader loader,AppData data) throws IOException {
         //reflection kullanarak controller a data göndermek
         //her constructor aynı parametreleri almadığı için setData metoduna erişimi bu şekilde sağlayarak geçiş sağlanabilir
-        try {     Class[] cArg = new Class[4]; //Our constructor has 3 arguments
-        cArg[0] = StageController.class; //First argument is of *object* type Long
-        cArg[1] = BookService.class; //Second argument is of *object* type String
-        cArg[2] = AuthorService.class; //Third argument is of *primitive* type int
+        try {     Class[] cArg = new Class[4];
+        cArg[0] = StageController.class;
+        cArg[1] = BookService.class;
+        cArg[2] = AuthorService.class;
         cArg[3]=PublisherService.class;
             AnchorPane root = (AnchorPane) loader.load();
             loader.getController().getClass().getMethod("setData", AppData.class).invoke(loader.getController().getClass().getDeclaredConstructor(

@@ -49,7 +49,8 @@ rb=new PropertyResourceBundle(new InputStreamReader(  ClassLoader.getSystemClass
        loader.setResources(rb);
         loader.setLocation( getClass().getClassLoader().getResource("Menu.fxml").toURI().toURL());
         AnchorPane root = loader.load();
-      root.setPrefSize(500,500);
+      root.setMaxSize(700, 700);
+      root.setMinSize(700,700);
       stage=new Stage();
       stage.setScene(new Scene(root));
         stageController.setMainStage(stage);

@@ -56,8 +56,9 @@ public class MenuController implements Initializable {
         fxBookList.getItems().addAll(bookService.getBooksComboList());
         AnchorPane.setTopAnchor(fxMenuGrid, 0.0);
         AnchorPane.setLeftAnchor(fxMenuGrid, 0.0);
-        fxMenuGrid.setMaxSize(500, 500);
-        fxMenuGrid.setMinSize(500, 500);
+        fxMenuGrid.setGridLinesVisible(true);
+        fxMenuGrid.setMaxSize(700, 700);
+        fxMenuGrid.setMinSize(700, 700);
         this.rb = resources;
         fxBookList.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newBookName) -> {
             try {//book name uqique olduğu için bu name ile listeden arar. Bulunca diğer sayfaya gönderir

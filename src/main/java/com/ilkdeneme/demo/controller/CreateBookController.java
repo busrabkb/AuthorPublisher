@@ -67,7 +67,7 @@ PublisherService publisherService;
         fxCloseButton.setOnMouseClicked(event ->
         {
             try {
-             closeScene();
+           stageController.  closeScene();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (URISyntaxException e) {
@@ -90,7 +90,7 @@ PublisherService publisherService;
 
             publisherService.savePublisher(publisher);
 
-                closeScene();
+               stageController. closeScene();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (URISyntaxException e) {
@@ -99,9 +99,7 @@ PublisherService publisherService;
         });
     }
 
-    private void closeScene() throws IOException, URISyntaxException {
-        stageController.loadNewScene("Menu",rb,new AppData());
-    }
+
 
     //book lar bir listede bind ile observable
 

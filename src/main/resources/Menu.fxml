@@ -17,38 +17,44 @@
     </stylesheets>
     <GridPane fx:id="fxMenuGrid" >
         <columnConstraints>
-            <ColumnConstraints percentWidth="50" halignment="CENTER" fillWidth="true"></ColumnConstraints>
-            <ColumnConstraints percentWidth="50" halignment="CENTER" fillWidth="true"></ColumnConstraints>
+            <ColumnConstraints percentWidth="33" halignment="CENTER" fillWidth="true"></ColumnConstraints>
+            <ColumnConstraints percentWidth="33" halignment="CENTER" fillWidth="true"></ColumnConstraints>
+            <ColumnConstraints percentWidth="33" halignment="CENTER" fillWidth="true"></ColumnConstraints>
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints percentHeight="20" valignment="CENTER" fillHeight="true"></RowConstraints>
-            <RowConstraints percentHeight="20" valignment="CENTER" fillHeight="true"></RowConstraints>
-            <RowConstraints percentHeight="20" valignment="CENTER" fillHeight="true"></RowConstraints>
-            <RowConstraints percentHeight="20" valignment="CENTER" fillHeight="true"></RowConstraints>
-            <RowConstraints percentHeight="20" valignment="CENTER" fillHeight="true"></RowConstraints>
-        </rowConstraints>
+            <RowConstraints percentHeight="33" valignment="CENTER" fillHeight="true"></RowConstraints>
+            <RowConstraints percentHeight="33" valignment="CENTER" fillHeight="true"></RowConstraints>
+            <RowConstraints percentHeight="33" valignment="CENTER" fillHeight="true"></RowConstraints>
+              </rowConstraints>
         <children>
-            <ComboBox fx:id="fxBookList" GridPane.columnIndex="0" promptText="select any Book for details"
-                      GridPane.rowIndex="0" ></ComboBox>
+            <ComboBox fx:id="fxBookList" GridPane.columnIndex="0" promptText="select any Book for details" prefWidth="200"
+prefHeight="50"                      GridPane.rowIndex="0" ></ComboBox>
+
+            <Button fx:id="fxSearchBookNameButton" text="SearchBookName" alignment="CENTER" GridPane.columnIndex="0"
+                    GridPane.rowIndex="1" prefWidth="200"
+                    prefHeight="50"       >
+            </Button>
+            <Button fx:id="fxSearchSerieNameButton" text="SearchSerieName" alignment="CENTER" GridPane.columnIndex="1"
+                    GridPane.rowIndex="1" prefWidth="200"
+                    prefHeight="50"       >
+            </Button>
+            <Button fx:id="fxSearchAuthorNameButton" text="SearchAuthorName" alignment="CENTER" GridPane.columnIndex="2"
+                    GridPane.rowIndex="1" prefWidth="200"
+                    prefHeight="50"       >
+            </Button>
             <Button fx:id="fxCreateBookButton" text="CreateBook" alignment="CENTER"
                     GridPane.columnIndex="0"
-                     GridPane.rowIndex="1">
+                    GridPane.rowIndex="2" prefWidth="200"
+                    prefHeight="50"       >
             </Button>
-            <Button fx:id="fxSearchBookNameButton" text="SearchBookName" alignment="CENTER" GridPane.columnIndex="1"
-                    GridPane.rowIndex="1">
-            </Button>
-            <Button fx:id="fxSearchSerieNameButton" text="SearchSerieName" alignment="CENTER" GridPane.columnIndex="2"
-                    GridPane.rowIndex="1">
-            </Button>
-            <Button fx:id="fxSearchAuthorNameButton" text="SearchAuthorName" alignment="CENTER" GridPane.columnIndex="3"
-                    GridPane.rowIndex="1">
-            </Button>
-            <Button fx:id="fxUpdateButton" text="Update" alignment="CENTER" GridPane.columnIndex="4"
-                    GridPane.rowIndex="1">
+            <Button fx:id="fxUpdateButton" text="Update" alignment="CENTER" GridPane.columnIndex="1"
+                    GridPane.rowIndex="2" prefWidth="200"
+                    prefHeight="50"       >
             </Button>
 
-            <Button fx:id="fxDeleteButton" text="Delete" alignment="CENTER" GridPane.columnIndex="4"
-                    GridPane.rowIndex="4">
+            <Button fx:id="fxDeleteButton" text="Delete" alignment="CENTER" GridPane.columnIndex="2"
+                    GridPane.rowIndex="2" prefWidth="200"
+                    prefHeight="50"       >
             </Button>
         </children>
     </GridPane>

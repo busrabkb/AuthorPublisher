@@ -10,7 +10,7 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.ilkdeneme.demo.controller.BookDetailsController"
-            prefHeight="400.0" prefWidth="600.0">
+          fx:id="fxAnchor"  prefHeight="400.0" prefWidth="600.0">
 
     <stylesheets>
         <URL value="@myCss.css"/>
@@ -18,8 +18,9 @@
     </stylesheets>
     <GridPane fx:id="fxGrid" >
         <columnConstraints>
-            <ColumnConstraints percentWidth="50" hgrow="ALWAYS"></ColumnConstraints>
-            <ColumnConstraints percentWidth="50" hgrow="ALWAYS"></ColumnConstraints>
+            <ColumnConstraints percentWidth="33" hgrow="ALWAYS"></ColumnConstraints>
+            <ColumnConstraints percentWidth="33" hgrow="ALWAYS"></ColumnConstraints>
+            <ColumnConstraints percentWidth="33" hgrow="ALWAYS"></ColumnConstraints>
         </columnConstraints>
         <rowConstraints>
             <RowConstraints percentHeight="20" ></RowConstraints>
@@ -46,7 +47,7 @@
             <TextField fx:id="fxIsbnNo" alignment="CENTER" GridPane.columnIndex="2"
                        GridPane.rowIndex="3" disable="true" ></TextField>
 
-            <Button fx:id="fxCloseButton" text="StudentListButton" alignment="CENTER" GridPane.columnIndex="2"
+            <Button fx:id="fxCloseButton" text="Close" alignment="CENTER" GridPane.columnIndex="0"
                     GridPane.rowIndex="4">
             </Button>
 
