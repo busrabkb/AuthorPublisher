@@ -36,8 +36,11 @@ public class MenuController implements Initializable {
     TextField fxSearchSerieName;
     @FXML
     TextField fxSearchAuthorName;
-
     ResourceBundle rb;
+    @FXML
+    TextField fxSearchIsbn;
+    @FXML
+    Button fxSearchIsbnButton;
     @FXML
     Button fxUpdateButton;
     @FXML
@@ -48,7 +51,7 @@ public class MenuController implements Initializable {
     AnchorPane fxAnchor;
     StageController stageController;
     BookService bookService;
-  AuthorService authorService;
+    AuthorService authorService;
     @FXML
     Button fxCreateBookButton;
 
@@ -87,9 +90,22 @@ public class MenuController implements Initializable {
         fxSearchBookNameButton.setOnMouseClicked(event ->
         {
             try {
-                Book book=  bookService.getBookFromName(fxSearchBookName.getText());
+                Book book = bookService.getBookFromName(fxSearchBookName.getText());
+                StageController.setOpenedBook(book);
+                stageController.loadNewScene("BookDetails", rb, new AppData(book));
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
 
-                stageController.loadNewScene("BookDetails",rb,new AppData(book));
+        });
+        fxSearchIsbnButton.setOnMouseClicked(event ->
+        {
+            try {
+                Book book = bookService.getBookFromIsbn(fxSearchIsbn.getText());
+                StageController.setOpenedBook(book);
+                stageController.loadNewScene("BookDetails", rb, new AppData(book));
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (URISyntaxException e) {
@@ -99,10 +115,25 @@ public class MenuController implements Initializable {
         });
         fxSearchAuthorNameButton.setOnMouseClicked(event ->
         {
-            if (authorService.getAuthorBooksFromName(fxSearchAuthorName.getText()).size()!=0) {
+            if (authorService.getAuthorBooksFromName(fxSearchAuthorName.getText()).size() != 0) {
                 stageController.setSearchedAuthorBooksList(authorService.getAuthorBooksFromName(fxSearchAuthorName.getText()));
-                stageController.openPopup("searchedAuthorBookDetails",new AppData(  StageController.getSearchedAuthorBooksList() ));
-            }     });
+                stageController.openPopup("searchedAuthorBookDetails", new AppData(StageController.getSearchedAuthorBooksList()));
+            }
+        });
+        fxSearchSerieNameButton.setOnMouseClicked(event ->
+        {
+            try {
+                if (bookService.getBookFromSerieName(fxSearchSerieName.getText()) != null) {
+                    StageController.setOpenedBook(bookService.getBookFromSerieName(fxSearchSerieName.getText()));
+                    stageController.loadNewScene("BookDetails", rb, new AppData());
+
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        });
         fxUpdateButton.setOnMouseClicked(event ->
         {
 

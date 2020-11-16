@@ -32,20 +32,20 @@
         <children>
             <Label text="NAME" alignment="CENTER" GridPane.columnIndex="0"
                    GridPane.rowIndex="0"></Label>
-            <TextField disable="true" fx:id="fxName" alignment="CENTER" GridPane.columnIndex="2"
+            <TextField fx:id="fxName" alignment="CENTER" GridPane.columnIndex="2"
                        GridPane.rowIndex="0" ></TextField>
             <Label text="AUTHOR" alignment="CENTER" GridPane.columnIndex="0"
                    GridPane.rowIndex="1" ></Label>
             <TextField fx:id="fxAuthorName" alignment="CENTER" GridPane.columnIndex="2"
-                       GridPane.rowIndex="1"  disable="true"></TextField>
+                       GridPane.rowIndex="1"  ></TextField>
             <Label text="PUBLISHER" alignment="CENTER" GridPane.columnIndex="0"
                    GridPane.rowIndex="2"></Label>
             <TextField fx:id="fxPublisher" alignment="CENTER" GridPane.columnIndex="2"
-                       GridPane.rowIndex="2" disable="true" ></TextField>
+                       GridPane.rowIndex="2"></TextField>
             <Label text="ISBN NO" alignment="CENTER" GridPane.columnIndex="0"
                    GridPane.rowIndex="3"></Label>
             <TextField fx:id="fxIsbnNo" alignment="CENTER" GridPane.columnIndex="2"
-                       GridPane.rowIndex="3" disable="true" ></TextField>
+                       GridPane.rowIndex="3" ></TextField>
 
             <Button fx:id="fxCloseButton" text="Close" alignment="CENTER" GridPane.columnIndex="0"
                     GridPane.rowIndex="4">

@@ -37,7 +37,7 @@ AuthorRepository authorRepository;
    return  bookFactory.createData(bookEntity); }
 
     @Override
-    public void deleteBook(int isbn) {
+    public void deleteBook(String isbn) {
 bookRepository.deleteByIsnbNoEquals(isbn);
     }
 
@@ -65,5 +65,15 @@ bookRepository.deleteByIsnbNoEquals(isbn);
       if (entity==null) return false;
       else
           return true;
+    }
+
+    @Override
+    public Book getBookFromSerieName(String serieName) {
+        return bookFactory.createData( bookRepository.findBySeriesNameEquals(serieName)) ;
+    }
+
+    @Override
+    public Book getBookFromIsbn(String isbn) {
+        return bookFactory.createData(bookRepository.findByIsnbNoEquals(isbn));
     }
 }

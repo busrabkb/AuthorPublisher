@@ -110,12 +110,10 @@ public void openPopup(String sceneType, AppData appData)
 {   GridPane grid = new GridPane();
     AnchorPane.setTopAnchor(grid, 0.0);
     AnchorPane.setLeftAnchor(grid, 0.0);
-int bookInfoSize=5;
+
     grid.setMaxSize(500, 500);
     grid.setMinSize(500, 500);
-grid.setStyle("-fx-background-color: red");
-    VBox dialogVbox = new VBox(20);
- dialogVbox.setStyle("-fx-background-color: pink");
+     VBox dialogVbox = new VBox(20);
     if (appData.getSearchedAuthorBooksList().size()!=0)
     {int row=0;
     int col=0;
@@ -133,9 +131,9 @@ grid.setStyle("-fx-background-color: red");
                 grid.add(text3, col, 2);
                 col++;
                }
-        ColumnConstraints c1 = new ColumnConstraints(100, 100, 100);
-        ColumnConstraints c2 = new ColumnConstraints(100, 100, 100);
-        ColumnConstraints c3 = new ColumnConstraints(100, 100, 100);
+        ColumnConstraints c1 = new ColumnConstraints(150, 150, 150);
+        ColumnConstraints c2 = new ColumnConstraints(150, 150, 150);
+        ColumnConstraints c3 = new ColumnConstraints(150, 150, 150);
 grid.getColumnConstraints().addAll(c1,c2,c3);
     }
     dialogVbox.getChildren().add(grid);

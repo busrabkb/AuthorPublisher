@@ -13,7 +13,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BookRepository  extends CrudRepository<BookEntity, Long>
-{ BookEntity findByIsnbNoEquals(int isbnNo);
-  BookEntity deleteByIsnbNoEquals(int isbnNo);
+{ BookEntity findByIsnbNoEquals(String isbnNo);
+  BookEntity deleteByIsnbNoEquals(String isbnNo);
 BookEntity findByNameEquals(String name);
+BookEntity findBySeriesNameEquals(String serieName);
 }

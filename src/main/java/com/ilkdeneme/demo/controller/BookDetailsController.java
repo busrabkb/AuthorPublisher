@@ -76,7 +76,7 @@ public class BookDetailsController implements Initializable {
         fxPublisher.setText(publisherService.getPublisherfromId(openedBook.getId()).getName());
         fxIsbnNo.setText(openedBook.getIsnbNo());
         fxCloseButton.setOnMouseClicked(event ->
-        {
+        { StageController.setOpenedBook(null);
             try {
                 stageController.  closeScene();
             } catch (IOException e) {
