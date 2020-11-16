@@ -2,14 +2,23 @@ package com.ilkdeneme.demo.controller;
 
 import com.ilkdeneme.demo.Data.AppData;
 import com.ilkdeneme.demo.Data.Book;
+import com.ilkdeneme.demo.Entity.BookEntity;
 import com.ilkdeneme.demo.service.AuthorService;
 import com.ilkdeneme.demo.service.BookService;
 import com.ilkdeneme.demo.service.PublisherService;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -18,12 +27,12 @@ import org.springframework.stereotype.Component;
 import java.awt.*;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.PropertyResourceBundle;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.List;
 
 @Component("stageController")
 public class StageController {
@@ -33,6 +42,7 @@ public static Book openedBook=new Book();
     AuthorService authorService;
     PublisherService publisherService;
     public HashMap<String, Book> bookList = new HashMap<>();
+ public static    List<Book> searchedAuthorBooksList=new ArrayList<>();
     @Autowired
     private ApplicationContext appContext;
 ResourceBundle rb;
@@ -85,6 +95,7 @@ rb=rb;
         }
     }
 
+
     public static Book getOpenedBook() {
         return openedBook;
     }
@@ -95,16 +106,52 @@ rb=rb;
 
     public StageController() {
     }
-//public Stage openPopup()
-//{
-//    final Stage dialog = new Stage();
-//    dialog.initModality(Modality.APPLICATION_MODAL);
-//    dialog.initOwner(getMainStage());
-//    VBox dialogVbox = new VBox(20);
-//    dialogVbox.getChildren().add(new Text("This is a Dialog"));
-//    Scene dialogScene = new Scene(dialogVbox, 300, 200);
-//    dialog.setScene(dialogScene);
-//return dialog;}
+public void openPopup(String sceneType, AppData appData)
+{   GridPane grid = new GridPane();
+    AnchorPane.setTopAnchor(grid, 0.0);
+    AnchorPane.setLeftAnchor(grid, 0.0);
+int bookInfoSize=5;
+    grid.setMaxSize(500, 500);
+    grid.setMinSize(500, 500);
+grid.setStyle("-fx-background-color: red");
+    VBox dialogVbox = new VBox(20);
+ dialogVbox.setStyle("-fx-background-color: pink");
+    if (appData.getSearchedAuthorBooksList().size()!=0)
+    {int row=0;
+    int col=0;
+     for (Book book : appData.getSearchedAuthorBooksList()) {
+
+                TextField text = new TextField();
+                text.setText(book.getName());
+                TextField text2 = new TextField();
+                text2.setText(book.getIsnbNo());
+                TextField text3 = new TextField();
+                text3.setText(book.getSeriesName());
+
+                grid.add(text, col, 0);
+                grid.add(text2, col, 1);
+                grid.add(text3, col, 2);
+                col++;
+               }
+        ColumnConstraints c1 = new ColumnConstraints(100, 100, 100);
+        ColumnConstraints c2 = new ColumnConstraints(100, 100, 100);
+        ColumnConstraints c3 = new ColumnConstraints(100, 100, 100);
+grid.getColumnConstraints().addAll(c1,c2,c3);
+    }
+    dialogVbox.getChildren().add(grid);
+
+    Scene dialogScene = new Scene(dialogVbox, 600, 600);
+ getMainStage().setScene(dialogScene);
+// dialog.show();
+}
+
+    public static List<Book> getSearchedAuthorBooksList() {
+        return searchedAuthorBooksList;
+    }
+
+    public static void setSearchedAuthorBooksList(List<Book> searchedAuthorBooksList) {
+        StageController.searchedAuthorBooksList = searchedAuthorBooksList;
+    }
 
     public HashMap<String, Book> getBookList() {
         return bookList;

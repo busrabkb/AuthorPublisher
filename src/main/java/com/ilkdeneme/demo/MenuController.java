@@ -3,11 +3,13 @@ package com.ilkdeneme.demo;
 import com.ilkdeneme.demo.Data.AppData;
 import com.ilkdeneme.demo.Data.Book;
 import com.ilkdeneme.demo.controller.StageController;
+import com.ilkdeneme.demo.service.AuthorService;
 import com.ilkdeneme.demo.service.BookService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import org.springframework.stereotype.Component;
@@ -15,8 +17,7 @@ import org.springframework.stereotype.Component;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.ResourceBundle;
 
 @Component
@@ -29,6 +30,13 @@ public class MenuController implements Initializable {
     Button fxSearchSerieNameButton;
     @FXML
     Button fxSearchAuthorNameButton;
+    @FXML
+    TextField fxSearchBookName;
+    @FXML
+    TextField fxSearchSerieName;
+    @FXML
+    TextField fxSearchAuthorName;
+
     ResourceBundle rb;
     @FXML
     Button fxUpdateButton;
@@ -40,14 +48,14 @@ public class MenuController implements Initializable {
     AnchorPane fxAnchor;
     StageController stageController;
     BookService bookService;
+  AuthorService authorService;
     @FXML
     Button fxCreateBookButton;
 
-    public MenuController(StageController stageController, BookService bookService) {
+    public MenuController(StageController stageController, BookService bookService, AuthorService authorService) {
         this.stageController = stageController;
         this.bookService = bookService;
-
-
+        this.authorService = authorService;
     }
 
     @Override
@@ -56,7 +64,7 @@ public class MenuController implements Initializable {
         fxBookList.getItems().addAll(bookService.getBooksComboList());
         AnchorPane.setTopAnchor(fxMenuGrid, 0.0);
         AnchorPane.setLeftAnchor(fxMenuGrid, 0.0);
-        fxMenuGrid.setGridLinesVisible(true);
+
         fxMenuGrid.setMaxSize(700, 700);
         fxMenuGrid.setMinSize(700, 700);
         this.rb = resources;
@@ -67,7 +75,7 @@ public class MenuController implements Initializable {
                 StageController.setOpenedBook(getBook(newVal));
                 stageController.loadNewScene
                         ("BookDetails", rb, new AppData(
-                           getBook(newVal)
+                                getBook(newVal)
                         ));
 
             } catch (IOException e) {
@@ -78,14 +86,23 @@ public class MenuController implements Initializable {
         });
         fxSearchBookNameButton.setOnMouseClicked(event ->
         {
+            try {
+                Book book=  bookService.getBookFromName(fxSearchBookName.getText());
 
+                stageController.loadNewScene("BookDetails",rb,new AppData(book));
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
 
         });
         fxSearchAuthorNameButton.setOnMouseClicked(event ->
         {
-
-
-        });
+            if (authorService.getAuthorBooksFromName(fxSearchAuthorName.getText()).size()!=0) {
+                stageController.setSearchedAuthorBooksList(authorService.getAuthorBooksFromName(fxSearchAuthorName.getText()));
+                stageController.openPopup("searchedAuthorBookDetails",new AppData(  StageController.getSearchedAuthorBooksList() ));
+            }     });
         fxUpdateButton.setOnMouseClicked(event ->
         {
 
@@ -110,7 +127,7 @@ public class MenuController implements Initializable {
 
     }
 
-    private Book getBook (String newVal) {
+    private Book getBook(String newVal) {
         return stageController.getBookList().values()
                 .stream().parallel()
                 .filter(val -> newVal.equals(val.getName())).findFirst().get();

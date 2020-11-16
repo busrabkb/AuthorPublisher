@@ -7,9 +7,9 @@ import com.ilkdeneme.demo.Repository.AuthorRepository;
 import com.ilkdeneme.demo.Repository.BookRepository;
 import com.ilkdeneme.demo.Repository.PublisherRepository;
 import com.ilkdeneme.demo.ServiceApi.IBookService;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,9 +45,14 @@ bookRepository.deleteByIsnbNoEquals(isbn);
     public Map<String, Book> getAllBook() {
         Map<String,Book> bookList=new HashMap<>();
   bookList.putAll(bookFactory.createBookList(bookRepository.findAll()));
-        return bookList;
+
+             return bookList;
     }
 
+    public Book getBookFromName(String name) {
+        return  bookFactory.createData(bookRepository.findByNameEquals(name));
+
+    }
     @Override
     public List<String> getBooksComboList() {
          return  bookFactory.createBookNameList(bookRepository.findAll());
