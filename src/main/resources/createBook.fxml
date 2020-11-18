@@ -6,7 +6,7 @@
 <?import java.net.URL?>
 <AnchorPane fx:id="fxAnchor" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.ilkdeneme.demo.controller.CreateBookController">
+            fx:controller="com.ilkdeneme.demo.Controller.CreateBookController">
     <stylesheets>
         <URL value="@myCss.css"/>
 

@@ -1,4 +1,4 @@
-package com.ilkdeneme.demo.controller;
+package com.ilkdeneme.demo.Controller;
 
 import com.ilkdeneme.demo.Converter.AuthorFactory;
 import com.ilkdeneme.demo.Converter.BookFactory;
@@ -7,25 +7,23 @@ import com.ilkdeneme.demo.Data.AppData;
 import com.ilkdeneme.demo.Data.Author;
 import com.ilkdeneme.demo.Data.Book;
 import com.ilkdeneme.demo.Data.Publisher;
-import com.ilkdeneme.demo.Entity.AuthorEntity;
-import com.ilkdeneme.demo.Entity.BookEntity;
-import com.ilkdeneme.demo.Entity.PublisherEntity;
 import com.ilkdeneme.demo.service.AuthorService;
 import com.ilkdeneme.demo.service.BookService;
 import com.ilkdeneme.demo.service.PublisherService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import org.springframework.beans.factory.annotation.Autowired;
+import javafx.stage.Popup;
 import org.springframework.stereotype.Component;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 @Component
@@ -80,12 +78,14 @@ public class CreateBookController implements Initializable {
         fxSaveButton.setOnMouseClicked(event ->
         {
             try {
-                Book book = new Book();
+                if (fxName.getText().equals(bookService.isBookNameExist(fxName.getText()))) {
+
+                    Book book = new Book();
                 book.setName(fxName.getText());
                 book.setIsnbNo(fxIsbnNo.getText());
-                if (fxName.getText().equals(bookService.isBookNameExist(fxName.getText()))) {
-                    stageController.loadNewScene("Menu", rb, new AppData());
-                }
+                 stageController.loadNewScene("Menu", rb, new AppData());
+
+
                 Author author = new Author();
                 author.setName(fxAuthorName.getText());
 
@@ -100,10 +100,13 @@ public class CreateBookController implements Initializable {
                 book.setPublisher(publisher);
                 book.setAuthor(author);
                 Book savedBookData = bookService.saveBook(book);
+
     stageController.getBookList().put(savedBookData.getId(),savedBookData);
     StageController.setOpenedBook(null);
+    stageController.openDialog("Saved.");
                 stageController.closeScene();
-            } catch (IOException e) {
+            }
+        } catch (IOException e) {
                 e.printStackTrace();
             } catch (URISyntaxException e) {
                 e.printStackTrace();

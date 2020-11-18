@@ -1,9 +1,8 @@
 package com.ilkdeneme.demo;
 
-import com.ilkdeneme.demo.controller.StageController;
+import com.ilkdeneme.demo.Controller.StageController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -12,11 +11,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 @SpringBootApplication(scanBasePackages={"com.ilkdeneme.demo"})

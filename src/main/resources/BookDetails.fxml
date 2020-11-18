@@ -9,7 +9,7 @@
 <?import java.net.URL?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.ilkdeneme.demo.controller.BookDetailsController"
+            fx:controller="com.ilkdeneme.demo.Controller.BookDetailsController"
             fx:id="fxAnchor" prefHeight="400.0" prefWidth="600.0">
 
     <stylesheets>

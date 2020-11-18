@@ -1,13 +1,8 @@
-package com.ilkdeneme.demo.controller;
+package com.ilkdeneme.demo.Controller;
 
-import com.ilkdeneme.demo.Converter.AuthorFactory;
-import com.ilkdeneme.demo.Converter.BookFactory;
-import com.ilkdeneme.demo.Converter.PublisherFactory;
-import com.ilkdeneme.demo.Data.AppData;
 import com.ilkdeneme.demo.Data.Author;
 import com.ilkdeneme.demo.Data.Book;
 import com.ilkdeneme.demo.Data.Publisher;
-import com.ilkdeneme.demo.MenuController;
 import com.ilkdeneme.demo.service.AuthorService;
 import com.ilkdeneme.demo.service.BookService;
 import com.ilkdeneme.demo.service.PublisherService;
@@ -54,7 +49,6 @@ public class BookDetailsController implements Initializable {
     Book openedBook = new Book();
 
 
-
     public BookDetailsController(StageController stageController, BookService bookService, AuthorService authorService, PublisherService publisherService) {
         this.stageController = stageController;
         this.bookService = bookService;
@@ -71,12 +65,13 @@ public class BookDetailsController implements Initializable {
         AnchorPane.setLeftAnchor(fxGrid, 0.0);
         fxGrid.setMaxSize(700, 700);
         fxGrid.setMinSize(700, 700);
-if (!openedBook.getId().equals(null))
-{    fxName.setText(openedBook.getName());
-        fxAuthorName.setText(openedBook.getAuthor().getName());
-        fxPublisher.setText(openedBook.getPublisher().getName());
-        fxSerieName.setText(openedBook.getSeriesName());
-        fxIsbnNo.setText(openedBook.getIsnbNo());}
+        if (!openedBook.getId().equals(null)) {
+            fxName.setText(openedBook.getName());
+            fxAuthorName.setText(openedBook.getAuthor().getName());
+            fxPublisher.setText(openedBook.getPublisher().getName());
+            fxSerieName.setText(openedBook.getSeriesName());
+            fxIsbnNo.setText(openedBook.getIsnbNo());
+        }
         fxCloseButton.setOnMouseClicked(event ->
         {
             StageController.setOpenedBook(null);
@@ -94,33 +89,36 @@ if (!openedBook.getId().equals(null))
         fxUpdateButton.setOnMouseClicked(event ->
         {
             Book updatedBook = new Book();
-
             updatedBook.setName(fxName.getText());
+
             Author author = new Author();
             author.setName(fxAuthorName.getText());
+
             Publisher publisher = new Publisher();
             publisher.setName(fxPublisher.getText());
+
             updatedBook.setSeriesName(fxSerieName.getText());
             updatedBook.setIsnbNo(fxIsbnNo.getText());
+
             updatedBook.setId(openedBook.getId());
-             updatedBook.setAuthor(author);
-          updatedBook.setPublisher(publisher);
+
+            updatedBook.setAuthor(author);
+            updatedBook.setPublisher(publisher);
+
             author.setId(openedBook.getAuthor().getId());
-         //   authorService.update(author);
-         publisher.setId( openedBook.getPublisher().getId());
-       //     publisherService.update(publisher);
+            publisher.setId(openedBook.getPublisher().getId());
             bookService.update(updatedBook);
             //kitap listesi güncellendi
-            stageController.getBookList().putIfAbsent(updatedBook.getId(),updatedBook);
-
+            stageController.getBookList().putIfAbsent(updatedBook.getId(), updatedBook);
+            stageController.openDialog("Updated:" + updatedBook.getName());
         });
         fxDeleteButton.setOnMouseClicked(event ->
-     {
-
+        {
             bookService.deleteBook(openedBook.getId());
-
-stageController.getBookList().remove(openedBook.getId());
-         openedBook.setId(String.valueOf(0));   });
+            stageController.getBookList().remove(openedBook.getId());
+            openedBook.setId(String.valueOf(0));
+        });
+        stageController.openDialog("Deleted:" + openedBook.getName());
     }
 
     private Book getBook(String newVal) {

@@ -2,7 +2,7 @@ package com.ilkdeneme.demo;
 
 import com.ilkdeneme.demo.Data.AppData;
 import com.ilkdeneme.demo.Data.Book;
-import com.ilkdeneme.demo.controller.StageController;
+import com.ilkdeneme.demo.Controller.StageController;
 import com.ilkdeneme.demo.service.AuthorService;
 import com.ilkdeneme.demo.service.BookService;
 import javafx.fxml.FXML;
@@ -19,6 +19,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 @Component
 public class MenuController implements Initializable {
@@ -71,10 +72,11 @@ public class MenuController implements Initializable {
             try {//book name uqique olduğu için bu name ile listeden arar. Bulunca diğer sayfaya gönderir
                 //static old için direkt static liste de cağrılabilir
                 String newVal = (String) newBookName;
-                StageController.setOpenedBook(getBook(newVal));
+                StageController.setOpenedBook(stageController.getBookList().values()
+                .stream().filter(book -> book.getName().equals(newVal)).findFirst().get());
                 stageController.loadNewScene
                         ("BookDetails", rb, new AppData(
-                                getBook(newVal)
+                                stageController.getBookList().get(newVal)
                         ));
 
             } catch (IOException e) {
@@ -112,8 +114,10 @@ public class MenuController implements Initializable {
         fxSearchAuthorNameButton.setOnMouseClicked(event ->
         {
             if (bookService.getBookAuthorFromAuthorId(fxSearchAuthorName.getText()).size() != 0) {
-                stageController.setSearchedAuthorBooksList(bookService.getBookAuthorFromAuthorId(fxSearchAuthorName.getText()));
-                stageController.openPopup("searchedAuthorBookDetails", new AppData(StageController.getSearchedAuthorBooksList()));
+                stageController.setSearchedAuthorBooksList(
+                       getAuthorBooksFromBookList(fxSearchAuthorName.getText())
+                     );
+                stageController.openBooksScene("searchedAuthorBookDetails", new AppData(StageController.getSearchedAuthorBooksList()));
             }
         });
         fxSearchSerieNameButton.setOnMouseClicked(event ->
@@ -147,18 +151,12 @@ public class MenuController implements Initializable {
 
     }
 
-    private Book getBook(String newVal) {
-        return stageController.getBookList().values()
+    private List<Book> getAuthorBooksFromBookList(String authorName) {
+        return  stageController.getBookList().values()
                 .stream().parallel()
-                .filter(val -> newVal.equals(val.getName())).findFirst().get();
+                .filter(val -> val.getAuthor().getName().equals(authorName)).collect(Collectors.toList()) ;
     }
 
-    private void openBookDetails(String path) throws IOException {
-        try {
-            stageController.loadNewScene("BookDetails", rb, new AppData());
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
 
-    }
+
 }

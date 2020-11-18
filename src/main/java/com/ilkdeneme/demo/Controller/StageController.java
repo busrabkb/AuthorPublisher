@@ -1,65 +1,57 @@
-package com.ilkdeneme.demo.controller;
+package com.ilkdeneme.demo.Controller;
 
 import com.ilkdeneme.demo.Data.AppData;
 import com.ilkdeneme.demo.Data.Book;
-import com.ilkdeneme.demo.Entity.BookEntity;
 import com.ilkdeneme.demo.service.AuthorService;
 import com.ilkdeneme.demo.service.BookService;
 import com.ilkdeneme.demo.service.PublisherService;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import java.awt.*;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.*;
 import java.util.List;
 
 @Component("stageController")
 public class StageController {
     public Stage mainStage;
-public static Book openedBook=new Book();
+    public static Book openedBook = new Book();
     BookService bookService;
     AuthorService authorService;
     PublisherService publisherService;
     public HashMap<String, Book> bookList = new HashMap<>();
- public static    List<Book> searchedAuthorBooksList=new ArrayList<>();
+    public static List<Book> searchedAuthorBooksList = new ArrayList<>();
     @Autowired
     private ApplicationContext appContext;
-ResourceBundle rb;
+    ResourceBundle rb;
+
     public void loadNewScene(String sceneName, ResourceBundle rb, AppData data) throws IOException, URISyntaxException {
         try {
-rb=rb;
+            rb = rb;
             FXMLLoader loader = new FXMLLoader();
             loader.setControllerFactory(appContext::getBean);
 
             loader.setResources(rb);
             loader.setLocation(getClass().getClassLoader().getResource(sceneName + ".fxml").toURI().toURL());
             AnchorPane root = (AnchorPane) loader.load();
-          setOpenedBook(data.getBook());
+            setOpenedBook(data.getBook());
 //            if (loader.getController().getClass().equals(BookDetailsController.class))
 //    setDataToControllerReflection(loader,data);
             root.setMaxSize(700, 700);
-           root.setMinSize(700,700);
+            root.setMinSize(700, 700);
             getMainStage().setScene(new Scene(root));
 
         } catch (Exception e) {
@@ -67,20 +59,23 @@ rb=rb;
         }
 
     }
-     void closeScene() throws IOException, URISyntaxException {
-  loadNewScene("Menu",this.rb,new AppData());
+
+    void closeScene() throws IOException, URISyntaxException {
+        loadNewScene("Menu", this.rb, new AppData());
     }
-    private void setDataToControllerReflection(FXMLLoader loader,AppData data) throws IOException {
+
+    private void setDataToControllerReflection(FXMLLoader loader, AppData data) throws IOException {
         //reflection kullanarak controller a data göndermek
         //her constructor aynı parametreleri almadığı için setData metoduna erişimi bu şekilde sağlayarak geçiş sağlanabilir
-        try {     Class[] cArg = new Class[4];
-        cArg[0] = StageController.class;
-        cArg[1] = BookService.class;
-        cArg[2] = AuthorService.class;
-        cArg[3]=PublisherService.class;
+        try {
+            Class[] cArg = new Class[4];
+            cArg[0] = StageController.class;
+            cArg[1] = BookService.class;
+            cArg[2] = AuthorService.class;
+            cArg[3] = PublisherService.class;
             AnchorPane root = (AnchorPane) loader.load();
             loader.getController().getClass().getMethod("setData", AppData.class).invoke(loader.getController().getClass().getDeclaredConstructor(
-                    cArg     ).newInstance(this
+                    cArg).newInstance(this
                     , bookService, authorService, publisherService), data);
 
         } catch (NoSuchMethodException e) {
@@ -93,7 +88,8 @@ rb=rb;
             e.printStackTrace();
         }
     }
- public static Book getOpenedBook() {
+
+    public static Book getOpenedBook() {
         return openedBook;
     }
 
@@ -103,18 +99,18 @@ rb=rb;
 
     public StageController() {
     }
-public void openPopup(String sceneType, AppData appData)
-{   GridPane grid = new GridPane();
-    AnchorPane.setTopAnchor(grid, 0.0);
-    AnchorPane.setLeftAnchor(grid, 0.0);
 
-    grid.setMaxSize(500, 500);
-    grid.setMinSize(500, 500);
-     VBox dialogVbox = new VBox(20);
-    if (appData.getSearchedAuthorBooksList().size()!=0)
-    {int row=0;
-    int col=0;
-     for (Book book : appData.getSearchedAuthorBooksList()) {
+    public void openBooksScene(String sceneType, AppData appData) {
+        GridPane grid = new GridPane();
+        AnchorPane.setTopAnchor(grid, 0.0);
+        AnchorPane.setLeftAnchor(grid, 0.0);
+
+        grid.setMaxSize(500, 500);
+        grid.setMinSize(500, 500);
+        VBox box = new VBox(20);
+        if (appData.getSearchedAuthorBooksList().size() != 0) {
+            int col = 0;
+            for (Book book : appData.getSearchedAuthorBooksList()) {
 
                 TextField text = new TextField();
                 text.setText(book.getName());
@@ -127,19 +123,26 @@ public void openPopup(String sceneType, AppData appData)
                 grid.add(text2, col, 1);
                 grid.add(text3, col, 2);
                 col++;
-               }
-        ColumnConstraints c1 = new ColumnConstraints(150, 150, 150);
-        ColumnConstraints c2 = new ColumnConstraints(150, 150, 150);
-        ColumnConstraints c3 = new ColumnConstraints(150, 150, 150);
-grid.getColumnConstraints().addAll(c1,c2,c3);
-    }
-    dialogVbox.getChildren().add(grid);
+            }
+            ColumnConstraints c1 = new ColumnConstraints(150, 150, 150);
+            ColumnConstraints c2 = new ColumnConstraints(150, 150, 150);
+            ColumnConstraints c3 = new ColumnConstraints(150, 150, 150);
+            grid.getColumnConstraints().addAll(c1, c2, c3);
+        }
+        box.getChildren().add(grid);
 
-    Scene dialogScene = new Scene(dialogVbox, 600, 600);
- getMainStage().setScene(dialogScene);
+        Scene scene = new Scene(box, 600, 600);
+        getMainStage().setScene(scene);
 // dialog.show();
-}
+    }
+public void openDialog(String message)
+{
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("Information Dialog");
+     alert.setContentText(message);
 
+    alert.showAndWait();
+}
     public static List<Book> getSearchedAuthorBooksList() {
         return searchedAuthorBooksList;
     }
