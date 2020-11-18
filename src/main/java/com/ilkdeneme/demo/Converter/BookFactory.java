@@ -8,36 +8,55 @@ import com.ilkdeneme.demo.Entity.BookEntity;
 import com.ilkdeneme.demo.Entity.PublisherEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
 @Component
 public class BookFactory {
 
-    AuthorFactory authorFactory;
-
 
     public BookEntity createEntity(Book data) {
-        BookEntity entity = new BookEntity();
-        entity.setId(Long.valueOf(data.getId()));
+        BookEntity  entity= new BookEntity();
+        entity.setId(Long.valueOf( data.getId()));
         entity.setName(data.getName());
         entity.setIsnbNo(data.getIsnbNo());
+        entity.setSeriesName(data.getSeriesName());
+        AuthorEntity authorEntity=new AuthorEntity();
+        PublisherEntity publisherEntity=new PublisherEntity();
+        authorEntity.setId(Long.valueOf(data.getAuthor().getId()));
+        authorEntity.setName(data.getAuthor().getName());
 
+        entity.setAuthor(authorEntity);
+        publisherEntity.setName(data.getPublisher().getName());
+        publisherEntity.setId(Long.valueOf(data.getPublisher().getId()));
+        publisherEntity.setName(data.getPublisher().getName());
+        entity.setPublisher(publisherEntity);
         return entity;
     }
-
+@Transactional
     public Book createData(BookEntity entity) {
         Book data = new Book();
         data.setId(String.valueOf(entity.getId()));
         data.setName(entity.getName());
         data.setIsnbNo(entity.getIsnbNo());
+        data.setSeriesName(entity.getSeriesName());
+        Author authorData=new Author();
+        Publisher publisherData=new Publisher();
+        authorData.setId(String.valueOf(entity.getAuthor().getId()));
+        authorData.setName(entity.getAuthor().getName());
+
+        data.setAuthor(authorData);
+        publisherData.setName(entity.getPublisher().getName());
+        publisherData.setId(String.valueOf(entity.getPublisher().getId()));
+        publisherData.setName(entity.getPublisher().getName());
+        data.setPublisher(publisherData);
         return data;
     }
 
-    public BookFactory(AuthorFactory authorFactory) {
-        this.authorFactory = authorFactory;
+    public BookFactory() {
     }
-
+@Transactional
     public Map<String, Book> createBookList(Iterable<BookEntity> all) {
         Map<String, Book> books = new HashMap<>();
         all.forEach(bookEntity ->
@@ -49,7 +68,7 @@ public class BookFactory {
         );
         return books;
     }
-
+@Transactional
     public List<String> createBookNameList(Iterable<BookEntity> all) {
         List<String> books = new ArrayList<>();
         all.forEach(bookEntity ->
@@ -61,7 +80,7 @@ public class BookFactory {
         );
         return books;
     }
-
+@Transactional
     public List<Book> createBookDataList(Iterable<BookEntity> all) {
         List<Book> books = new ArrayList<>();
         all.forEach(bookEntity ->
@@ -77,15 +96,5 @@ public class BookFactory {
         return books;
     }
 
-    public List<BookEntity> createBookEntityList(List<Book> books) {
-        List<BookEntity> bookEntityList = new ArrayList<>();
-        books.forEach(book -> {
-            BookEntity bookEntity = new BookEntity();
-            //  bookEntity.setAuthor(new AuthorEntity(book.getAuthor().getName()  ));
-            bookEntity.setIsnbNo(book.getIsnbNo());
-            bookEntity.setName(book.getName());
-            bookEntityList.add(bookEntity);
-        });
-        return bookEntityList;
-    }
+
 }

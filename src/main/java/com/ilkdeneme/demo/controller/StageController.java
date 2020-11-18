@@ -46,7 +46,6 @@ public static Book openedBook=new Book();
     @Autowired
     private ApplicationContext appContext;
 ResourceBundle rb;
-
     public void loadNewScene(String sceneName, ResourceBundle rb, AppData data) throws IOException, URISyntaxException {
         try {
 rb=rb;
@@ -94,9 +93,7 @@ rb=rb;
             e.printStackTrace();
         }
     }
-
-
-    public static Book getOpenedBook() {
+ public static Book getOpenedBook() {
         return openedBook;
     }
 

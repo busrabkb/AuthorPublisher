@@ -16,8 +16,13 @@ public class BookEntity {
     String name;
     String subName;
     String seriesName;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "publisher_id", nullable = false)
+    PublisherEntity publisher=new PublisherEntity();
 
-
+    @ManyToOne( optional = false, cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+    @JoinColumn(name = "author_id", nullable = false)
+    AuthorEntity author=new AuthorEntity();
     @Column()
     String isnbNo;
     String description;
@@ -38,7 +43,21 @@ public class BookEntity {
     public BookEntity() {
     }
 
+    public PublisherEntity getPublisher() {
+        return publisher;
+    }
 
+    public void setPublisher(PublisherEntity publisher) {
+        this.publisher = publisher;
+    }
+
+    public AuthorEntity getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(AuthorEntity author) {
+        this.author = author;
+    }
 
     public String getName() {
         return name;

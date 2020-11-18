@@ -7,7 +7,6 @@ import com.ilkdeneme.demo.Repository.AuthorRepository;
 import com.ilkdeneme.demo.Repository.BookRepository;
 import com.ilkdeneme.demo.Repository.PublisherRepository;
 import com.ilkdeneme.demo.ServiceApi.IBookService;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -28,17 +27,16 @@ AuthorRepository authorRepository;
         this.bookFactory = bookFactory;
 
     }
-
     @Override
     public Book saveBook(Book data) {
-
+data.setId(String.valueOf(0));
  BookEntity bookEntity= bookRepository.save(bookFactory.createEntity(data));
 
    return  bookFactory.createData(bookEntity); }
 
     @Override
-    public void deleteBook(String isbn) {
-bookRepository.deleteByIsnbNoEquals(isbn);
+    public void deleteBook(String id) {
+bookRepository.deleteByIsnbNoEquals(id);
     }
 
     @Override
@@ -68,9 +66,20 @@ bookRepository.deleteByIsnbNoEquals(isbn);
     }
 
     @Override
+    public void update(Book book) {
+          bookRepository.save( bookFactory.createEntity(book));
+    }
+
+    @Override
     public Book getBookFromSerieName(String serieName) {
         return bookFactory.createData( bookRepository.findBySeriesNameEquals(serieName)) ;
     }
+    @Override
+    public List<Book> getBookAuthorFromAuthorId(String id) {
+      List<BookEntity>  entityList= bookRepository.findByAuthor(Long.valueOf(id))  ;
+
+        return    bookFactory.createBookDataList(entityList);
+  }
 
     @Override
     public Book getBookFromIsbn(String isbn) {

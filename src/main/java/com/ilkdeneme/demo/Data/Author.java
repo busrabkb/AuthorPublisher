@@ -8,28 +8,27 @@ import java.util.Collections;
 import java.util.List;
 
 public class Author {
+   String id;
     String name;
     String surName;
     String address;
     String sex;
     String description;
-    Book book=new Book();
-
     public Author() {
 
     }
 
-    public Author(String name, Book book) {
+    public Author(String name ) {
         this.name = name;
-        this.book = book;
+
     }
 
-    public Book getBook() {
-        return book;
+    public String getId() {
+        return id;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

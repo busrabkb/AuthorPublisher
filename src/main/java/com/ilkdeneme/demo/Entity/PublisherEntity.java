@@ -11,13 +11,10 @@ import java.util.List;
 public class PublisherEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int Id;
+    Long Id;
     String name;
     String registerDate;
     String description;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "book_id", nullable = false)
-    BookEntity book=new BookEntity();
 
 
 
@@ -28,21 +25,14 @@ public class PublisherEntity implements Serializable {
 
     }
 
-    public int getId() {
+    public Long getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         Id = id;
     }
 
-    public BookEntity getBook() {
-        return book;
-    }
-
-    public void setBook(BookEntity book) {
-        this.book = book;
-    }
 
     public PublisherEntity() {
 

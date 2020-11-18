@@ -5,6 +5,7 @@ import java.util.List;
 
 public class AppData {
  public  Book book;
+ public boolean isUpdate;
     List<Book> searchedAuthorBooksList=new ArrayList<>();
 
     public AppData() {
@@ -16,6 +17,14 @@ public class AppData {
 
     public AppData(List<Book> searchedAuthorBooksList) {
         this.searchedAuthorBooksList = searchedAuthorBooksList;
+    }
+
+    public boolean isUpdate() {
+        return isUpdate;
+    }
+
+    public void setUpdate(boolean update) {
+        isUpdate = update;
     }
 
     public Book getBook() {

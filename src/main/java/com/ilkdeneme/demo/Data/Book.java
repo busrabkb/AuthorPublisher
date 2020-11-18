@@ -8,12 +8,28 @@ String id;
     String name;
     String subName;
     String seriesName;
-
-   // Publisher publisher;
+    Author author;
+    Publisher publisher;
     String isnbNo;
     String description;
 
     public Book() {
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
     }
 
     public Book(String name) {

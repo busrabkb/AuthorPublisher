@@ -61,15 +61,7 @@
                     GridPane.rowIndex="5" prefWidth="200"
                     prefHeight="100">
             </Button>
-            <Button fx:id="fxUpdateButton" text="Update" alignment="CENTER" GridPane.columnIndex="0"
-                    GridPane.rowIndex="5" prefWidth="200"
-                    prefHeight="100">
-            </Button>
 
-            <Button fx:id="fxDeleteButton" text="Delete" alignment="CENTER" GridPane.columnIndex="1"
-                    GridPane.rowIndex="5" prefWidth="200"
-                    prefHeight="100">
-            </Button>
         </children>
     </GridPane>
 </AnchorPane>

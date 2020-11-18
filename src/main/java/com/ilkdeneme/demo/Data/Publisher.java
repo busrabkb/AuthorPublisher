@@ -8,14 +8,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class Publisher {
+    String id;
     String name;
     String registerDate;
     String description;
-    Book book=new Book();
-String id;
-    public Publisher(String name, Book book) {
+
+    public Publisher(String name ) {
         this.name = name;
-        this.book = book;
+
     }
 
     public String getId() {
@@ -27,14 +27,6 @@ String id;
     }
 
     public Publisher() {
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
     }
 
     public String getName() {

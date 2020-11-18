@@ -16,17 +16,10 @@ import java.util.*;
 public class PublisherFactory {
 
 
-
-
-
     public PublisherEntity createEntity(Publisher data) {
         PublisherEntity entity = new PublisherEntity();
-        BookEntity bookEntity=new BookEntity();
-        bookEntity.setId(Long.valueOf(data.getBook().getId()));
-        bookEntity.setName(data.getBook().getName());
-        bookEntity.setIsnbNo(data.getBook().getIsnbNo());
-        entity.setBook(bookEntity);
-        entity.setDescription(data.getDescription() );
+        entity.setId(Long.valueOf(data.getId()));
+           entity.setDescription(data.getDescription() );
         entity.setName(data.getName());
 
         return entity;
@@ -34,15 +27,21 @@ public class PublisherFactory {
     @Transactional
     public Publisher createData(Optional<PublisherEntity> entity) {
         Publisher data = new Publisher();
-        Book book=new Book();
-        book.setId(String.valueOf(entity.get().getBook().getId()));
-        book.setName(entity.get().getBook().getName());
-        book.setIsnbNo(entity.get().getBook().getIsnbNo());
-        data.setBook( book);
+       data.setId(String.valueOf(entity.get().getId()));
         data.setDescription(entity.get().getDescription());
         data.setName(entity.get().getName());
         return data;
     }
+    public Map<String, Publisher> createPublisherList(Iterable<PublisherEntity> all) {
+        Map<String, Publisher> publisherMap = new HashMap<>();
+        all.forEach(entity ->
+                {
+                    Publisher publisher = createData(Optional.ofNullable(entity));
+                    publisherMap.put(String.valueOf(entity.getId()), publisher);
+                }
 
+        );
+        return publisherMap;
+    }
 
 }

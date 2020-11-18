@@ -22,15 +22,8 @@ import java.util.Optional;
 public class AuthorFactory {
     public AuthorEntity createEntity(Author data) {
         AuthorEntity entity = new AuthorEntity();
-
+entity.setId(Long.valueOf(data.getId()));
         entity.setName(data.getName());
-        BookEntity bookEntity = new BookEntity();
-
-bookEntity.setName(data.getBook().getName());
-bookEntity.setId(Long.valueOf(data.getBook().getId()));
-        bookEntity.setIsnbNo(data.getBook().getIsnbNo());
-        entity.setDescription(data.getDescription());
-entity.setBook( bookEntity);
 
         return entity;
     }
@@ -39,12 +32,9 @@ entity.setBook( bookEntity);
 @Transactional
     public Author createData(Optional<AuthorEntity> entity) {
         Author data = new Author();
-        Book book=new Book();
-        book.setIsnbNo(entity.get().getBook().getIsnbNo());
-        book.setName(entity.get().getBook().getName());
-        book.setId(String.valueOf(entity.get().getBook().getId()));
-         data.setBook(book);
+data.setId(String.valueOf(entity.get().getId()));
         data.setName(entity.get().getName());
+
         return data;
     }
 

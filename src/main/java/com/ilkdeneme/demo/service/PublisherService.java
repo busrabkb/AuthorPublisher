@@ -2,11 +2,12 @@ package com.ilkdeneme.demo.service;
 
 import com.ilkdeneme.demo.Converter.PublisherFactory;
 import com.ilkdeneme.demo.Data.Publisher;
-import com.ilkdeneme.demo.Entity.PublisherEntity;
 import com.ilkdeneme.demo.Repository.PublisherRepository;
 import com.ilkdeneme.demo.ServiceApi.IPublisherService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Map;
 
 @Service
 public class PublisherService implements IPublisherService {
@@ -20,23 +21,29 @@ public class PublisherService implements IPublisherService {
     }
 
     @Override
-    public void savePublisher(Publisher data) {
-        PublisherEntity publisherEntity= publisherRepository.save(publisherFactory.createEntity(data));
+    public long savePublisher(Publisher data) {
+        data.setId(String.valueOf(0));
+       return publisherRepository.save(publisherFactory.createEntity(data)).getId();
     }
 
     @Override
-    public void deletePublisher(Publisher data) {
-
+    public void deletePublisher(String id) {
+publisherRepository.deleteById(Long.valueOf(id));
     }
 
     @Override
-    public void getAllPublisher() {
+    public void update(Publisher publisher) {
+  publisherRepository.save(publisherFactory.createEntity(publisher) )  ;
+    }
 
+    @Override
+    public Map<String, Publisher> getAllPublisher() {
+  return    publisherFactory.createPublisherList( publisherRepository.findAll()) ;
     }
 @Transactional
     @Override
     public Publisher getPublisherfromId(String id) {
 
-      return   publisherFactory.createData( publisherRepository.findByBook_Id(Long.valueOf(id))) ;
-    }
+//      return   publisherFactory.createData( publisherRepository.findByBook_Id(Long.valueOf(id))) ;
+   return  null; }
 }

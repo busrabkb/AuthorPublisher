@@ -42,10 +42,6 @@ public class MenuController implements Initializable {
     @FXML
     Button fxSearchIsbnButton;
     @FXML
-    Button fxUpdateButton;
-    @FXML
-    Button fxDeleteButton;
-    @FXML
     GridPane fxMenuGrid;
     @FXML
     AnchorPane fxAnchor;
@@ -115,8 +111,8 @@ public class MenuController implements Initializable {
         });
         fxSearchAuthorNameButton.setOnMouseClicked(event ->
         {
-            if (authorService.getAuthorBooksFromName(fxSearchAuthorName.getText()).size() != 0) {
-                stageController.setSearchedAuthorBooksList(authorService.getAuthorBooksFromName(fxSearchAuthorName.getText()));
+            if (bookService.getBookAuthorFromAuthorId(fxSearchAuthorName.getText()).size() != 0) {
+                stageController.setSearchedAuthorBooksList(bookService.getBookAuthorFromAuthorId(fxSearchAuthorName.getText()));
                 stageController.openPopup("searchedAuthorBookDetails", new AppData(StageController.getSearchedAuthorBooksList()));
             }
         });
@@ -134,15 +130,8 @@ public class MenuController implements Initializable {
                 e.printStackTrace();
             }
         });
-        fxUpdateButton.setOnMouseClicked(event ->
-        {
-
-        });
-        fxDeleteButton.setOnMouseClicked(event ->
-        {
 
 
-        });
 
         fxCreateBookButton.setOnMouseClicked(event ->
         {

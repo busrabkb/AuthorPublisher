@@ -55,19 +55,21 @@ public class CreateBookController implements Initializable {
 
     BookService bookService;
     AuthorService authorService;
-PublisherService publisherService;
+    PublisherService publisherService;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         this.rb = resources;
-        AnchorPane.setTopAnchor(fxGrid,0.0);
-        AnchorPane.setLeftAnchor(fxGrid,0.0);
+        AnchorPane.setTopAnchor(fxGrid, 0.0);
+        AnchorPane.setLeftAnchor(fxGrid, 0.0);
         fxGrid.setMaxSize(500, 500);
         fxGrid.setMinSize(500, 500);
         fxCloseButton.setOnMouseClicked(event ->
         {
             try {
-           stageController.  closeScene();
+                StageController.setOpenedBook(null);
+                stageController.closeScene();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (URISyntaxException e) {
@@ -76,21 +78,31 @@ PublisherService publisherService;
 
         });
         fxSaveButton.setOnMouseClicked(event ->
-        {   try {
-            Book book = new Book();
-             book.setName(fxName.getText());
-            book.setIsnbNo(fxIsbnNo.getText());
-          if (fxName.getText().equals(bookService.isBookNameExist(fxName.getText())))
-          { stageController.loadNewScene("Menu",rb,new AppData());}
-      book.setId(String.valueOf(0));
-      Book savedBookData=    bookService.saveBook(book);
-            Author author =new Author(fxAuthorName.getText(),savedBookData);
-            authorService.saveAuthor(author);
-            Publisher publisher=new Publisher(fxPublisher.getText(),savedBookData);
+        {
+            try {
+                Book book = new Book();
+                book.setName(fxName.getText());
+                book.setIsnbNo(fxIsbnNo.getText());
+                if (fxName.getText().equals(bookService.isBookNameExist(fxName.getText()))) {
+                    stageController.loadNewScene("Menu", rb, new AppData());
+                }
+                Author author = new Author();
+                author.setName(fxAuthorName.getText());
 
-            publisherService.savePublisher(publisher);
+                Publisher publisher = new Publisher();
+                publisher.setName(fxAuthorName.getText());
 
-               stageController. closeScene();
+                Long publisherId = publisherService.savePublisher(publisher);
+                publisher.setId(String.valueOf(publisherId));
+
+                Long authorId = authorService.saveAuthor(author);
+                author.setId(String.valueOf(authorId));
+                book.setPublisher(publisher);
+                book.setAuthor(author);
+                Book savedBookData = bookService.saveBook(book);
+    stageController.getBookList().put(savedBookData.getId(),savedBookData);
+    StageController.setOpenedBook(null);
+                stageController.closeScene();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (URISyntaxException e) {
@@ -98,7 +110,6 @@ PublisherService publisherService;
             }
         });
     }
-
 
 
     //book lar bir listede bind ile observable

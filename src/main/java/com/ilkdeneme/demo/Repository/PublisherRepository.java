@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface PublisherRepository extends CrudRepository<PublisherEntity,Long> {
-  Optional<PublisherEntity> findByBook_Id(Long id);
+//  Optional<PublisherEntity> findByBook_Id(Long id);
 }

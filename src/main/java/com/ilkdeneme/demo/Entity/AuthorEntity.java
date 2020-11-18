@@ -18,13 +18,7 @@ public class AuthorEntity implements Serializable {
     String address;
     String sex;
     String description;
-    @ManyToOne( optional = false, cascade = CascadeType.MERGE, fetch=FetchType.LAZY)
-    @JoinColumn(name = "book_id", nullable = false)
- BookEntity book=new BookEntity();
 
-    public BookEntity getBook() {
-        return book;
-    }
 
     public Long getId() {
         return Id;
@@ -34,9 +28,6 @@ public class AuthorEntity implements Serializable {
         Id = id;
     }
 
-    public void setBook(BookEntity book) {
-        this.book = book;
-    }
 
     public AuthorEntity() {
    }

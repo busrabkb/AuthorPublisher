@@ -1,7 +1,6 @@
 package com.ilkdeneme.demo.ServiceApi;
 
 import com.ilkdeneme.demo.Data.Book;
-import com.ilkdeneme.demo.Entity.BookEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,9 +16,11 @@ public interface IBookService {
 
     Map<String, Book> getAllBook();
     List<String> getBooksComboList();
-
-     boolean isBookNameExist(String name);
-
+      Book getBookFromName(String name);
+    boolean isBookNameExist(String name);
+      void update(Book name);
     Book getBookFromSerieName(String text);
     Book getBookFromIsbn(String isbn);
+
+    List<Book> getBookAuthorFromAuthorId(String id);
 }
