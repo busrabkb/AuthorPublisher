@@ -36,7 +36,7 @@ data.setId(String.valueOf(0));
 
     @Override
     public void deleteBook(String id) {
-bookRepository.deleteByIsnbNoEquals(id);
+bookRepository.deleteById(Long.valueOf(id));
     }
 
     @Override

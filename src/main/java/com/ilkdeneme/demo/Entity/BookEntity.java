@@ -16,11 +16,11 @@ public class BookEntity {
     String name;
     String subName;
     String seriesName;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "publisher_id", nullable = false)
     PublisherEntity publisher=new PublisherEntity();
 
-    @ManyToOne( optional = false, cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+    @ManyToOne( optional = false, cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinColumn(name = "author_id", nullable = false)
     AuthorEntity author=new AuthorEntity();
     @Column()

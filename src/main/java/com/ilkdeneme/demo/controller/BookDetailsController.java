@@ -106,9 +106,9 @@ if (!openedBook.getId().equals(null))
              updatedBook.setAuthor(author);
           updatedBook.setPublisher(publisher);
             author.setId(openedBook.getAuthor().getId());
-            authorService.update(author);
+         //   authorService.update(author);
          publisher.setId( openedBook.getPublisher().getId());
-            publisherService.update(publisher);
+       //     publisherService.update(publisher);
             bookService.update(updatedBook);
             //kitap listesi güncellendi
             stageController.getBookList().putIfAbsent(updatedBook.getId(),updatedBook);
@@ -118,8 +118,6 @@ if (!openedBook.getId().equals(null))
      {
 
             bookService.deleteBook(openedBook.getId());
-        authorService.deleteAuthor(openedBook.getAuthor().getId());
-         publisherService.deletePublisher(openedBook.getPublisher().getId());
 
 stageController.getBookList().remove(openedBook.getId());
          openedBook.setId(String.valueOf(0));   });
