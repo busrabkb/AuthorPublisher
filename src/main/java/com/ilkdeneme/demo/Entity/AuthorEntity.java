@@ -19,6 +19,10 @@ public class AuthorEntity implements Serializable {
     String sex;
     String description;
 
+    public AuthorEntity(Long id, String name) {
+        Id = id;
+        this.name = name;
+    }
 
     public Long getId() {
         return Id;

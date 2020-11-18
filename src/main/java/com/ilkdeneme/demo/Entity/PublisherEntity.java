@@ -25,6 +25,11 @@ public class PublisherEntity implements Serializable {
 
     }
 
+    public PublisherEntity(Long id, String name) {
+        Id = id;
+        this.name = name;
+    }
+
     public Long getId() {
         return Id;
     }

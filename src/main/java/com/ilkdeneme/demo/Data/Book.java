@@ -3,6 +3,8 @@ package com.ilkdeneme.demo.Data;
 import com.ilkdeneme.demo.Entity.AuthorEntity;
 import com.ilkdeneme.demo.Entity.PublisherEntity;
 
+import java.util.Objects;
+
 public class Book {
 String id;
     String name;
@@ -30,6 +32,26 @@ String id;
 
     public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(id, book.id) &&
+                Objects.equals(name, book.name) &&
+                Objects.equals(subName, book.subName) &&
+                Objects.equals(seriesName, book.seriesName) &&
+                Objects.equals(author, book.author) &&
+                Objects.equals(publisher, book.publisher) &&
+                Objects.equals(isnbNo, book.isnbNo) &&
+                Objects.equals(description, book.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, subName, seriesName, author, publisher, isnbNo, description);
     }
 
     public Book(String name) {
