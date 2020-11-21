@@ -78,7 +78,7 @@ public class CreateBookController implements Initializable {
         fxSaveButton.setOnMouseClicked(event ->
         {
             try {
-                if (fxName.getText().equals(bookService.isBookNameExist(fxName.getText()))) {
+                if (!fxName.getText().equals(bookService.isBookNameExist(fxName.getText()))) {
 
                     Book book = new Book();
                 book.setName(fxName.getText());

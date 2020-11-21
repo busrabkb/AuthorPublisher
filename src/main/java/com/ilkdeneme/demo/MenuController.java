@@ -88,10 +88,11 @@ public class MenuController implements Initializable {
         fxSearchBookNameButton.setOnMouseClicked(event ->
         {
             try {
+                if (fxSearchBookName.getText()!=null) {
                 Book book = bookService.getBookFromName(fxSearchBookName.getText());
                 StageController.setOpenedBook(book);
                 stageController.loadNewScene("BookDetails", rb, new AppData(book));
-            } catch (IOException e) {
+            }   } catch (IOException e) {
                 e.printStackTrace();
             } catch (URISyntaxException e) {
                 e.printStackTrace();
@@ -101,10 +102,11 @@ public class MenuController implements Initializable {
         fxSearchIsbnButton.setOnMouseClicked(event ->
         {
             try {
-                Book book = bookService.getBookFromIsbn(fxSearchIsbn.getText());
-                StageController.setOpenedBook(book);
-                stageController.loadNewScene("BookDetails", rb, new AppData(book));
-            } catch (IOException e) {
+                if (fxSearchIsbn.getText()!=null) {
+                    Book book = bookService.getBookFromIsbn(fxSearchIsbn.getText());
+                    StageController.setOpenedBook(book);
+                    stageController.loadNewScene("BookDetails", rb, new AppData(book));
+                }      } catch (IOException e) {
                 e.printStackTrace();
             } catch (URISyntaxException e) {
                 e.printStackTrace();
@@ -112,7 +114,7 @@ public class MenuController implements Initializable {
 
         });
         fxSearchAuthorNameButton.setOnMouseClicked(event ->
-        {
+        {  if (fxSearchAuthorName.getText()!=null)
             if (bookService.getBookAuthorFromAuthorId(fxSearchAuthorName.getText()).size() != 0) {
                 stageController.setSearchedAuthorBooksList(
                        getAuthorBooksFromBookList(fxSearchAuthorName.getText())
@@ -123,6 +125,7 @@ public class MenuController implements Initializable {
         fxSearchSerieNameButton.setOnMouseClicked(event ->
         {
             try {
+
                 if (bookService.getBookFromSerieName(fxSearchSerieName.getText()) != null) {
                     StageController.setOpenedBook(bookService.getBookFromSerieName(fxSearchSerieName.getText()));
                     stageController.loadNewScene("BookDetails", rb, new AppData());

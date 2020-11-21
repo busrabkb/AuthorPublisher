@@ -5,9 +5,11 @@ import com.ilkdeneme.demo.Data.Book;
 import com.ilkdeneme.demo.service.AuthorService;
 import com.ilkdeneme.demo.service.BookService;
 import com.ilkdeneme.demo.service.PublisherService;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
@@ -17,7 +19,8 @@ import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
@@ -36,7 +39,7 @@ public class StageController {
     @Autowired
     private ApplicationContext appContext;
     ResourceBundle rb;
-
+Logger logger=LoggerFactory.getLogger(StageController.class);
     public void loadNewScene(String sceneName, ResourceBundle rb, AppData data) throws IOException, URISyntaxException {
         try {
             rb = rb;
@@ -54,7 +57,7 @@ public class StageController {
             getMainStage().setScene(new Scene(root));
 
         } catch (Exception e) {
-            System.out.println(e);
+       logger.info(e+":"+ getClass().getName());
         }
 
     }
@@ -135,12 +138,21 @@ public class StageController {
 // dialog.show();
     }
 public void openDialog(String message)
-{
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setTitle("Information Dialog");
-     alert.setContentText(message);
-
+{   try{
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Delete " +
+        "selection" + " ?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
     alert.showAndWait();
+
+//    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//    alert.setTitle("Information Dialog");
+//     alert.setContentText(message);
+
+   // alert.showAndWait();
+    }
+    catch (Exception e)
+    {
+
+    }
 }
     public static List<Book> getSearchedAuthorBooksList() {
         return searchedAuthorBooksList;
