@@ -117,8 +117,8 @@ public class BookDetailsController implements Initializable {
             bookService.deleteBook(openedBook.getId());
             stageController.getBookList().remove(openedBook.getId());
             openedBook.setId(String.valueOf(0));
+            stageController.openDialog("Deleted:" + openedBook.getName());
         });
-        stageController.openDialog("Deleted:" + openedBook.getName());
     }
 
     private Book getBook(String newVal) {

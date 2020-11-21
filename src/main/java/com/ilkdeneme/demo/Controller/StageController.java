@@ -139,8 +139,8 @@ Logger logger=LoggerFactory.getLogger(StageController.class);
     }
 public void openDialog(String message)
 {   try{
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Delete " +
-        "selection" + " ?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message +
+        " selected book" + " ?", ButtonType.CANCEL);
     alert.showAndWait();
 
 //    Alert alert = new Alert(Alert.AlertType.INFORMATION);
