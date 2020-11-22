@@ -7,6 +7,7 @@ import com.ilkdeneme.demo.Data.AppData;
 import com.ilkdeneme.demo.Data.Author;
 import com.ilkdeneme.demo.Data.Book;
 import com.ilkdeneme.demo.Data.Publisher;
+import com.ilkdeneme.demo.Enum.StageType;
 import com.ilkdeneme.demo.service.AuthorService;
 import com.ilkdeneme.demo.service.BookService;
 import com.ilkdeneme.demo.service.PublisherService;
@@ -83,7 +84,7 @@ public class CreateBookController implements Initializable {
                     Book book = new Book();
                 book.setName(fxName.getText());
                 book.setIsnbNo(fxIsbnNo.getText());
-                 stageController.loadNewScene("Menu", rb, new AppData());
+                 stageController.loadNewScene(StageType.MENU.getStageType(), rb, new AppData());
 
 
                 Author author = new Author();

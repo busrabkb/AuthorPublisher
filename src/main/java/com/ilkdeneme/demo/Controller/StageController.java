@@ -2,6 +2,7 @@ package com.ilkdeneme.demo.Controller;
 
 import com.ilkdeneme.demo.Data.AppData;
 import com.ilkdeneme.demo.Data.Book;
+import com.ilkdeneme.demo.Enum.StageType;
 import com.ilkdeneme.demo.service.AuthorService;
 import com.ilkdeneme.demo.service.BookService;
 import com.ilkdeneme.demo.service.PublisherService;
@@ -63,7 +64,7 @@ Logger logger=LoggerFactory.getLogger(StageController.class);
     }
 
     void closeScene() throws IOException, URISyntaxException {
-        loadNewScene("Menu", this.rb, new AppData());
+        loadNewScene(StageType.MENU.getStageType(), this.rb, new AppData());
     }
 
     private void setDataToControllerReflection(FXMLLoader loader, AppData data) throws IOException {
