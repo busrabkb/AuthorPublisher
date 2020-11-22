@@ -2,9 +2,8 @@ package com.ilkdeneme.demo.ServiceApi;
 
 
 import com.ilkdeneme.demo.Data.Author;
+import com.ilkdeneme.demo.Entity.AuthorEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public interface IAuthorService {
@@ -13,7 +12,7 @@ public interface IAuthorService {
 
  void deleteAuthor(String id);
 void update(Author author);
- List<Author> getAllAuthor();
+ Iterable<AuthorEntity> getAllAuthor();
 // Author getAuthorfromBookId(String id);
 //
 // public List<Book> getAuthorBooksFromName(String name);

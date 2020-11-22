@@ -20,6 +20,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Component
@@ -126,12 +127,13 @@ public class MenuController implements Initializable {
         fxSearchAuthorNameButton.setOnMouseClicked(event ->
         {
             if (fxSearchAuthorName.getText().length() != 0)
-                if (bookService.getBookAuthorFromAuthorId(fxSearchAuthorName.getText()).size() != 0) {
+               if (getAuthorBooksFromBookList(fxSearchAuthorName.getText()).size()!=0)
                     stageController.setSearchedAuthorBooksList(
                             getAuthorBooksFromBookList(fxSearchAuthorName.getText())
+
                     );
                     stageController.openBooksScene(StageType.SEARCHED_BOOK_DETAILS.getStageType(), new AppData(StageController.getSearchedAuthorBooksList()));
-                }
+
         });
         fxSearchSerieNameButton.setOnMouseClicked(event ->
         {
