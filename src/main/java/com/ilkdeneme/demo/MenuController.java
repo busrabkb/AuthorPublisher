@@ -127,13 +127,13 @@ public class MenuController implements Initializable {
         fxSearchAuthorNameButton.setOnMouseClicked(event ->
         {
             if (fxSearchAuthorName.getText().length() != 0)
-               if (getAuthorBooksFromBookList(fxSearchAuthorName.getText()).size()!=0)
-                    stageController.setSearchedAuthorBooksList(
-                            getAuthorBooksFromBookList(fxSearchAuthorName.getText())
+               if (getAuthorBooksFromBookList(fxSearchAuthorName.getText()).size()!=0) {
+                   stageController.setSearchedAuthorBooksList(
+                           getAuthorBooksFromBookList(fxSearchAuthorName.getText())
 
-                    );
-                    stageController.openBooksScene(StageType.SEARCHED_BOOK_DETAILS.getStageType(), new AppData(StageController.getSearchedAuthorBooksList()));
-
+                   );
+                   stageController.openBooksScene(StageType.SEARCHED_BOOK_DETAILS.getStageType(), new AppData(StageController.getSearchedAuthorBooksList()));
+               }
         });
         fxSearchSerieNameButton.setOnMouseClicked(event ->
         {
@@ -171,6 +171,6 @@ public class MenuController implements Initializable {
                 .stream().parallel()
                 .filter(val -> val.getAuthor().getName().equals(authorName)).collect(Collectors.toList());
     }
-
+    
 
 }

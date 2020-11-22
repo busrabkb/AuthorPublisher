@@ -141,7 +141,7 @@ Logger logger=LoggerFactory.getLogger(StageController.class);
 public void openDialog(String message)
 {   try{
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message +
-        " selected book" + " ?", ButtonType.CANCEL);
+        " selected book" + ButtonType.CANCEL);
     alert.showAndWait();
 
 //    Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -152,7 +152,7 @@ public void openDialog(String message)
     }
     catch (Exception e)
     {
-
+logger.info(e.getClass().getName());
     }
 }
     public static List<Book> getSearchedAuthorBooksList() {
