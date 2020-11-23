@@ -51,7 +51,7 @@ bookService.saveBook(bookFactory.createData(book));
 	@Test
 	void createBookTest()
 	{
-	//assertEquals(bookList.get("1") , bookRepository.findById(Long.valueOf(bookList.get("1").getId())).get());
+	assertEquals(bookList.get("1") , bookRepository.findById(Long.valueOf(bookList.get("1").getId())).get());
 
 	}
 
