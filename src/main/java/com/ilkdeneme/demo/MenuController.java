@@ -171,6 +171,6 @@ public class MenuController implements Initializable {
                 .stream().parallel()
                 .filter(val -> val.getAuthor().getName().equals(authorName)).collect(Collectors.toList());
     }
-    
+
 
 }

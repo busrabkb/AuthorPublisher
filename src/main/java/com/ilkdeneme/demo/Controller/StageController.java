@@ -141,14 +141,9 @@ Logger logger=LoggerFactory.getLogger(StageController.class);
 public void openDialog(String message)
 {   try{
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message +
-        " selected book" + ButtonType.CANCEL);
+        " selected book" );
     alert.showAndWait();
-
-//    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//    alert.setTitle("Information Dialog");
-//     alert.setContentText(message);
-
-   // alert.showAndWait();
+  
     }
     catch (Exception e)
     {
