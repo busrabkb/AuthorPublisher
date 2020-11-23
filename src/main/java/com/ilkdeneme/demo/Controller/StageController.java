@@ -143,7 +143,7 @@ public void openDialog(String message)
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message +
         " selected book" );
     alert.showAndWait();
-  
+
     }
     catch (Exception e)
     {

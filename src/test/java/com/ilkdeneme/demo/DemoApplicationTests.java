@@ -8,17 +8,21 @@ import com.ilkdeneme.demo.Entity.PublisherEntity;
 import com.ilkdeneme.demo.Repository.BookRepository;
 import com.ilkdeneme.demo.service.AuthorService;
 import com.ilkdeneme.demo.service.BookService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import static org.junit.Assert.assertEquals;
 import java.util.HashMap;
 import java.util.Map;
-
 @SpringBootTest
-class DemoApplicationTests {
+@RunWith(SpringJUnit4ClassRunner.class)
+ class DemoApplicationTests {
 @Autowired
 	BookService bookService;
 @Autowired
@@ -32,7 +36,7 @@ Map <String,Book> bookList=new HashMap<>();
 	void contextLoads() {
 	}
 
-	@BeforeAll
+	@BeforeClass
 	void createBook()
 	{
 		BookEntity book=new BookEntity();
@@ -47,7 +51,7 @@ bookService.saveBook(bookFactory.createData(book));
 	@Test
 	void createBookTest()
 	{
-		Assertions.assertTrue( bookList.get("1").equals(bookRepository.findById(Long.valueOf(bookList.get("1").getId())).get())  );
+	//assertEquals(bookList.get("1") , bookRepository.findById(Long.valueOf(bookList.get("1").getId())).get());
 
 	}
 
@@ -58,4 +62,14 @@ bookService.saveBook(bookFactory.createData(book));
 		
 
 	}
-}
+
+	@TestConfiguration
+	static class MyTestConfig {
+		@Bean
+		public BookService helloService() {
+			return new BookService() {
+
+			};
+
+		}
+	}}

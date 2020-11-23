@@ -9,11 +9,14 @@ import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Configuration;
 
 import java.io.InputStreamReader;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+
 @SpringBootApplication(scanBasePackages={"com.ilkdeneme.demo"})
 
 public class DemoApplication extends Application  {
