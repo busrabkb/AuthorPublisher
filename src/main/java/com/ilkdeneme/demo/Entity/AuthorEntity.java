@@ -34,12 +34,11 @@ public class AuthorEntity implements Serializable {
 
 
     public AuthorEntity() {
-   }
+    }
 
     public AuthorEntity(String name) {
         this.name = name;
     }
-
 
 
     public String getName() {
@@ -57,6 +56,7 @@ public class AuthorEntity implements Serializable {
     public void setSurName(String surName) {
         this.surName = surName;
     }
+
     public String getAddress() {
         return address;
     }

@@ -42,15 +42,14 @@ public class AuthorService implements IAuthorService {
 
     @Override
     public Iterable<AuthorEntity> getAllAuthor() {
-       Iterable<AuthorEntity> entityList= authorRepository.findAll();
-        return  entityList;
+        Iterable<AuthorEntity> entityList = authorRepository.findAll();
+        return entityList;
     }
 
-    public Author findById(String id)
-    {
-       Optional<AuthorEntity> entity= authorRepository.findById(Long.valueOf(id)) ;
-   if (entity!=null)
-       return authorFactory.createData(entity);
-   return null;
+    public Author findById(String id) {
+        Optional<AuthorEntity> entity = authorRepository.findById(Long.valueOf(id));
+        if (entity != null)
+            return authorFactory.createData(entity);
+        return null;
     }
 }

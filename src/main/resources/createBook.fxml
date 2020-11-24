@@ -11,36 +11,36 @@
         <URL value="@myCss.css"/>
 
     </stylesheets>
-    <GridPane fx:id="fxGrid" >
+    <GridPane fx:id="fxGrid">
         <columnConstraints>
             <ColumnConstraints percentWidth="33" hgrow="ALWAYS"></ColumnConstraints>
             <ColumnConstraints percentWidth="33" hgrow="ALWAYS"></ColumnConstraints>
             <ColumnConstraints percentWidth="33" hgrow="ALWAYS"></ColumnConstraints>
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints percentHeight="20" ></RowConstraints>
-            <RowConstraints percentHeight="20" ></RowConstraints>
-            <RowConstraints percentHeight="20" ></RowConstraints>
-            <RowConstraints percentHeight="20" ></RowConstraints>
-            <RowConstraints percentHeight="20" ></RowConstraints>
+            <RowConstraints percentHeight="20"></RowConstraints>
+            <RowConstraints percentHeight="20"></RowConstraints>
+            <RowConstraints percentHeight="20"></RowConstraints>
+            <RowConstraints percentHeight="20"></RowConstraints>
+            <RowConstraints percentHeight="20"></RowConstraints>
         </rowConstraints>
         <children>
             <Label text="NAME" alignment="CENTER" GridPane.columnIndex="0"
                    GridPane.rowIndex="0"></Label>
             <TextField fx:id="fxName" alignment="CENTER" GridPane.columnIndex="2"
-                       GridPane.rowIndex="0" ></TextField>
+                       GridPane.rowIndex="0"></TextField>
             <Label text="AUTHOR" alignment="CENTER" GridPane.columnIndex="0"
                    GridPane.rowIndex="1"></Label>
             <TextField fx:id="fxAuthorName" alignment="CENTER" GridPane.columnIndex="2"
-                       GridPane.rowIndex="1" ></TextField>
+                       GridPane.rowIndex="1"></TextField>
             <Label text="PUBLISHER" alignment="CENTER" GridPane.columnIndex="0"
                    GridPane.rowIndex="2"></Label>
             <TextField fx:id="fxPublisher" alignment="CENTER" GridPane.columnIndex="2"
-                       GridPane.rowIndex="2" ></TextField>
+                       GridPane.rowIndex="2"></TextField>
             <Label text="ISBN NO" alignment="CENTER" GridPane.columnIndex="0"
                    GridPane.rowIndex="3"></Label>
             <TextField fx:id="fxIsbnNo" alignment="CENTER" GridPane.columnIndex="2"
-                       GridPane.rowIndex="3" ></TextField>
+                       GridPane.rowIndex="3"></TextField>
             <Button fx:id="fxSaveButton" text="Save" alignment="CENTER" GridPane.columnIndex="0"
                     GridPane.rowIndex="4">
             </Button>

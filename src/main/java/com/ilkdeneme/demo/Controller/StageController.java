@@ -22,6 +22,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
@@ -40,7 +41,8 @@ public class StageController {
     @Autowired
     private ApplicationContext appContext;
     ResourceBundle rb;
-Logger logger=LoggerFactory.getLogger(StageController.class);
+    Logger logger = LoggerFactory.getLogger(StageController.class);
+
     public void loadNewScene(String sceneName, ResourceBundle rb, AppData data) throws IOException, URISyntaxException {
         try {
             rb = rb;
@@ -58,7 +60,7 @@ Logger logger=LoggerFactory.getLogger(StageController.class);
             getMainStage().setScene(new Scene(root));
 
         } catch (Exception e) {
-       logger.info(e+":"+ getClass().getName());
+            logger.info(e + ":" + getClass().getName());
         }
 
     }
@@ -138,18 +140,18 @@ Logger logger=LoggerFactory.getLogger(StageController.class);
         getMainStage().setScene(scene);
 // dialog.show();
     }
-public void openDialog(String message)
-{   try{
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message +
-        " selected book" );
-    alert.showAndWait();
 
+    public void openDialog(String message) {
+        try {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message +
+                    " selected book");
+            alert.showAndWait();
+
+        } catch (Exception e) {
+            logger.info(e.getClass().getName());
+        }
     }
-    catch (Exception e)
-    {
-logger.info(e.getClass().getName());
-    }
-}
+
     public static List<Book> getSearchedAuthorBooksList() {
         return searchedAuthorBooksList;
     }

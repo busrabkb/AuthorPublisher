@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface PublisherRepository extends CrudRepository<PublisherEntity,Long> {
+public interface PublisherRepository extends CrudRepository<PublisherEntity, Long> {
 //  Optional<PublisherEntity> findByBook_Id(Long id);
 }

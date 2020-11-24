@@ -82,32 +82,32 @@ public class CreateBookController implements Initializable {
                 if (!fxName.getText().equals(bookService.isBookNameExist(fxName.getText()))) {
 
                     Book book = new Book();
-                book.setName(fxName.getText());
-                book.setIsnbNo(fxIsbnNo.getText());
-                 stageController.loadNewScene(StageType.MENU.getStageType(), rb, new AppData());
+                    book.setName(fxName.getText());
+                    book.setIsnbNo(fxIsbnNo.getText());
+                    stageController.loadNewScene(StageType.MENU.getStageType(), rb, new AppData());
 
 
-                Author author = new Author();
-                author.setName(fxAuthorName.getText());
+                    Author author = new Author();
+                    author.setName(fxAuthorName.getText());
 
-                Publisher publisher = new Publisher();
-                publisher.setName(fxAuthorName.getText());
+                    Publisher publisher = new Publisher();
+                    publisher.setName(fxAuthorName.getText());
 
-                Long publisherId = publisherService.savePublisher(publisher);
-                publisher.setId(String.valueOf(publisherId));
+                    Long publisherId = publisherService.savePublisher(publisher);
+                    publisher.setId(String.valueOf(publisherId));
 
-                Long authorId = authorService.saveAuthor(author);
-                author.setId(String.valueOf(authorId));
-                book.setPublisher(publisher);
-                book.setAuthor(author);
-                Book savedBookData = bookService.saveBook(book);
+                    Long authorId = authorService.saveAuthor(author);
+                    author.setId(String.valueOf(authorId));
+                    book.setPublisher(publisher);
+                    book.setAuthor(author);
+                    Book savedBookData = bookService.saveBook(book);
 
-    stageController.getBookList().put(savedBookData.getId(),savedBookData);
-    StageController.setOpenedBook(null);
-    stageController.openDialog("Saved.");
-                stageController.closeScene();
-            }
-        } catch (IOException e) {
+                    stageController.getBookList().put(savedBookData.getId(), savedBookData);
+                    StageController.setOpenedBook(null);
+                    stageController.openDialog("Saved.");
+                    stageController.closeScene();
+                }
+            } catch (IOException e) {
                 e.printStackTrace();
             } catch (URISyntaxException e) {
                 e.printStackTrace();

@@ -28,9 +28,6 @@ public class BookService implements IBookService {
 
     }
 
-    public BookService() {
-
-    }
 
     @Override
     public Book saveBook(Book data) {
